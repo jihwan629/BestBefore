@@ -4,13 +4,12 @@ import {
     StyleSheet,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Header from '../components/Header'
 
 const ListScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <Text>
-                목록 화면
-            </Text>
+            <Header title="목록" />
         </SafeAreaView>
     )
 }

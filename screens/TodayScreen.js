@@ -4,13 +4,12 @@ import {
     StyleSheet,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import Header from '../components/Header'
 
 const TodayScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <Text>
-                오늘 화면
-            </Text>
+            <Header title="오늘" />
         </SafeAreaView>
     )
 }
