@@ -4,13 +4,12 @@ import {
     StyleSheet,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import ViewHeader from '../components/ViewHeader'
 
 const ViewScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <Text>
-                읽기 화면
-            </Text>
+            <ViewHeader />
         </SafeAreaView>
     )
 }
