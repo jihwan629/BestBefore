@@ -4,26 +4,40 @@ import {
     StyleSheet,
     ScrollView,
     Image,
+    TouchableOpacity,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { withNavigation } from 'react-navigation'
 import ViewHeader from '../components/ViewHeader'
 
-const ViewScreen = () => {
+const ViewScreen = ({
+    navigation,
+}) => {
     return (
         <SafeAreaView style={styles.container}>
             <ViewHeader />
             <ScrollView contentContainerStyle={styles.info}>
-                <Image 
-                    style={styles.image}
-                    source={require('../assets/favicon.png')}
-                />
-                <Text style={styles.name}>
-                    식품 이름
-                </Text>
+                <TouchableOpacity
+                    activeOpacity={0.8}
+                    style={styles.info}
+                    onLongPress={() => {
+                        navigation.navigate('Edit')
+                    }}
+                >
+                    <Image 
+                        style={styles.image}
+                        source={require('../assets/favicon.png')}
+                    />
+                    
+                    <Text style={styles.name}>
+                        식품 이름
+                    </Text>
 
-                <Text style={styles.date}>
-                    날짜
-                </Text>
+                    <Text style={styles.date}>
+                        날짜
+                    </Text>
+                </TouchableOpacity>
+                
             </ScrollView>
         </SafeAreaView>
     )
@@ -42,20 +56,21 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: 200,
         height: 200,
-        resizeMode: 'contain',
+        resizeMode: 'cover',
+        transform: [{ scale: 0.55 }],
     },
     name: {
         padding: 20,
         fontSize: 25,
         lineHeight: 20,
-        color: '#424242'
+        color: '#424242',
     },
     date: {
         padding: 20,
         paddingTop: 20,
         fontSize: 20,
-        color: '#bdbdbd'
+        color: '#bdbdbd',
     }
 })
 
-export default ViewScreen
+export default withNavigation(ViewScreen)
