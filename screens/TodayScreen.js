@@ -2,23 +2,33 @@ import React from 'react'
 import { 
     Text,
     StyleSheet,
+    FlatList,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Header from '../components/Header'
+import { withContext } from 'react-simplified-context'
 import ArticleItem from '../components/ArticleItem'
+import Header from '../components/Header'
 
-let defaultimage = require('../assets/favicon.png');
-
-const TodayScreen = () => {
+const TodayScreen = ({
+    articles,
+}) => {
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="오늘" />
-            <ArticleItem
-                article={{
-                    id: 2,
-                    name: '제육 삼각김밥',
-                    date: '2021년 6월 11일',
-                    image: defaultimage,
+            <Header title="오늘"/>
+            <FlatList 
+                data={articles.filter((article) => {
+                    var date = new Date()
+                    var today = date.getFullYear() + '년 ' 
+                                + (date.getMonth() + 1) + '월 '
+                                + date.getDate() + '일'
+                    
+                    return article.date === today
+                })}
+                renderItem={({ item }) => {
+                    return <ArticleItem article={item} />
+                }}
+                keyExtractor={(item) => {
+                    return `${item.id}`
                 }}
             />
         </SafeAreaView>
@@ -31,4 +41,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TodayScreen
+export default withContext(TodayScreen)
