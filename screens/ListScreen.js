@@ -6,13 +6,14 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Header from '../components/Header'
 import ArticleItem from '../components/ArticleItem'
+import ListHeader from '../components/ListHeader'
 
 let defaultimage = require('../assets/favicon.png');
 
 const ListScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="목록" />
+            <ListHeader/>
             <ArticleItem
                 article={{
                     id: 1,
