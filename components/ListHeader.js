@@ -23,10 +23,10 @@ const ListHeader = ({
                 onPress={() => {
                     
                 }}
-                hitSlop={{ top: 32, bottom: 32, left: 32, right: 32}}
+                hitSlop={{ top: 32, left: 32, right: 32}}
             >
                 <Text style={styles.delete}>
-                    지난 날짜 일괄 삭제
+                    폐기 전부 삭제
                 </Text>
             </TouchableOpacity>
         </View>

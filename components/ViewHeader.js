@@ -27,10 +27,6 @@ const ViewHeader = ({
                 />
             </TouchableOpacity>
 
-            <Text style={styles.title}>
-                상세 정보
-            </Text>
-
             <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => {
@@ -56,13 +52,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingLeft: 16,
         paddingRight: 16,
-        borderBottomWidth: 1,
-        borderBottomColor: '#f1f1f1',
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: '#212121',
     }
 })
 
