@@ -14,7 +14,7 @@ const TodayScreen = ({
 }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="오늘"/>
+            <Header title="오늘" button="오늘 폐기 삭제"/>
             <FlatList 
                 data={articles.filter((article) => {
                     var date = new Date()

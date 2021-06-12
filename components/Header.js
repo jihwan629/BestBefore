@@ -3,16 +3,35 @@ import {
     View,
     Text,
     StyleSheet,
+    TouchableOpacity,
 } from 'react-native'
+import { withNavigation } from 'react-navigation'
+import { Ionicons } from '@expo/vector-icons'
 
-const Header = ({
+const ListHeader = ({
+    navigation,
     title,
+    button,
 }) => {
     return (
         <View style={styles.container}>
+
             <Text style={styles.header}>
                 {title}
             </Text>
+
+            <TouchableOpacity
+                activeOpacity={button === '' ? 1 : 0.8}
+                disabled={button === ''}
+                onPress={() => {
+                    
+                }}
+                hitSlop={{ top: 32, left: 32, right: 32}}
+            >
+                <Text style={styles.button}>
+                    {button}
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -23,6 +42,11 @@ const styles = StyleSheet.create({
         height: 52,
         borderBottomWidth: 0.3,
         borderBottomColor: '#bdbdbd',
+
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingRight: 16,
     },
     header: {
         paddingLeft: 16,
@@ -30,7 +54,11 @@ const styles = StyleSheet.create({
         color: '#212121',
         fontSize: 32,
         fontWeight: '600',
+    },
+    button: {
+        fontSize: 20,
+        color: '#da5746',
     }
 })
 
-export default Header
+export default withNavigation(ListHeader)

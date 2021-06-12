@@ -7,14 +7,14 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { withContext } from 'react-simplified-context'
 import ArticleItem from '../components/ArticleItem'
-import ListHeader from '../components/ListHeader'
+import Header from '../components/Header'
 
 const ListScreen = ({
     articles,
 }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <ListHeader/>
+            <Header title="목록" button="폐기 전부 삭제"/>
             <FlatList 
                 data={articles}
                 renderItem={({ item }) => {
