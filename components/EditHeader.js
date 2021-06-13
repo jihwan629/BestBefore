@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 const EditHeader = ({
     navigation,
+    done,
 }) => {
     return (
         <View style={styles.container}>
@@ -29,6 +30,7 @@ const EditHeader = ({
             <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => {
+                    done()
                     navigation.goBack()
                 }}
                 hitSlop={{ top: 32, bottom: 32, left: 32, right: 32}}

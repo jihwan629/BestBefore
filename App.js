@@ -23,12 +23,34 @@ export default class App extends React.Component {
         image: defaultimage,
       },
     ],
+    id: 3,
   }
 
   render() {
     return (
       <ContextProvider
         articles={this.state.articles}
+        create={(name, image, date) => {
+          if(image === undefined || image === '') 
+            image = defaultimage
+          else
+            image = {uri: `${image}`}
+
+          if(date === undefined || date === '') 
+            date = new Date()
+
+          this.setState({
+            articles: [{
+              id: this.state.id,
+              image: image,
+              name: name,
+              date: date.getFullYear() + '년 ' 
+              + (date.getMonth() + 1) + '월 '
+              + date.getDate() + '일'
+            }].concat(this.state.articles),
+            id: this.state.id + 1,
+          })
+        }}
       >
         <Navigator />
       </ContextProvider>
