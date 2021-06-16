@@ -31,19 +31,40 @@ const EditScreen = ({
         setDate(currentDate)
     }
 
-    useEffect(() => {
-        (async () => {
-            if(Platform.OS !== 'web') {
-                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-                if(status !== 'granted') {
-                    alert('미동의시 이미지 등록이 불가능합니다.')
-                }
-            }
-        })()
-    }, []) 
+    // 갤러리, 카메라 허락
+    // useEffect(() => {
+    //     (async () => {
+    //         if(Platform.OS !== 'web') {
+    //             const { allowLib } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+    //             if(allowLib !== 'granted') {
+    //                 alert('미동의시 이미지 등록이 불가능합니다.')
+    //             }
 
+    //             const { allowCam } = await ImagePicker.requestCameraPermissionsAsync()
+    //             if(allowCam !== 'granted') {
+    //                 alert('미동의시 이미지 촬영이 불가능합니다.')
+    //             }
+    //         }
+    //     })()
+    // }, []) 
+
+    // 갤러리에서 이미지 가져오기
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        })
+
+        if(!result.cancelled) {
+            setImage(result.uri)
+        } 
+    }
+
+    // 카메라로 이미지 촬영하기
+    const takePicture = async () => {
+        let result = await ImagePicker.launchCameraAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [1, 1],
