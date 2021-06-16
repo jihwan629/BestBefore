@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     info: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
     },
     image: {
