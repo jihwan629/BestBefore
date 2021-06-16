@@ -13,17 +13,23 @@ export default class App extends React.Component {
       {
         id: 1,
         name: '딸기 샌드위치, 백종원 도시락, 전주 비빔밥 삼각김밥, 바나나, 사과, 오렌지, 트윈 쿠키, 돈가스 삼각김밥, 제육 김밥, 참치마요 삼각김밥, 피쉬 버거',
-        date: '2021년 6월 10일',
+        date: new Date(2021, 5, 10),
         image: defaultimage,
       },
       {
         id: 2,
         name: '제육 삼각김밥',
-        date: '2021년 6월 13일',
+        date: new Date(),
+        image: defaultimage,
+      },
+      {
+        id: 3,
+        name: '콩나물',
+        date: new Date(2021, 5, 30),
         image: defaultimage,
       },
     ],
-    id: 3,
+    id: 4,
   }
 
   render() {
@@ -44,9 +50,7 @@ export default class App extends React.Component {
               id: this.state.id,
               image: image,
               name: name,
-              date: date.getFullYear() + '년 ' 
-              + (date.getMonth() + 1) + '월 '
-              + date.getDate() + '일'
+              date: date
             }].concat(this.state.articles),
             id: this.state.id + 1,
           })

@@ -17,12 +17,10 @@ const TodayScreen = ({
             <Header title="오늘" button="오늘 폐기 삭제"/>
             <FlatList 
                 data={articles.filter((article) => {
-                    var date = new Date()
-                    var today = date.getFullYear() + '년 ' 
-                                + (date.getMonth() + 1) + '월 '
-                                + date.getDate() + '일'
-                    
-                    return article.date === today
+                    var today = new Date()
+                    return article.date.getFullYear() === today.getFullYear()
+                            &&  article.date.getMonth() === today.getMonth()
+                            &&  article.date.getDate() === today.getDate()
                 })}
                 renderItem={({ item }) => {
                     return <ArticleItem article={item} />

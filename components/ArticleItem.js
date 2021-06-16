@@ -36,7 +36,9 @@ const ArticleItem = ({
 
                 <View style={styles.info}>
                     <Text style={styles.date}>
-                        {date}
+                        {date.getFullYear() + '년 ' 
+                        + (date.getMonth() + 1) + '월 '
+                        + date.getDate() + '일'}
                     </Text>
                     <Text 
                         style={styles.name}
