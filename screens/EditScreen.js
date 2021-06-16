@@ -1,38 +1,52 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { 
     Text,
     View,
     Image,
     TextInput,
     StyleSheet,
+    Platform,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { withContext } from 'react-simplified-context'
+import DateTimePicker from '@react-native-community/datetimepicker'
 import EditHeader from '../components/EditHeader'
-
 
 const EditScreen = ({
     create,
 }) => {
-    let name = ''
+    const [name, setName] = useState('')
+    const [image, setImage] = useState(require('../assets/favicon.png'))
+    const [date, setDate] = useState(new Date())
+    const [show, setShow] = useState(false)
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date
+        setShow(false)
+        setDate(currentDate)
+    }
 
     return (
         <SafeAreaView style={styles.container}>
             <EditHeader done={() => {
-                create(name)
+                create(name
+                    , image === require('../assets/favicon.png') ?
+                        '' : image
+                    , date)
             }} />
 
             <View style={styles.info}>
                 <Image 
                     style={styles.image}
-                    source={require('../assets/favicon.png')}
+                    source={image}
                 />
                     
                 <TextInput 
                     placeholder="상품명" 
                     multiline={true}
+                    textAlign='center'
                     onChangeText={(text) => { 
-                        name = text 
+                        setName(text) 
                     }}
                     style={styles.name}
                 >
@@ -41,9 +55,29 @@ const EditScreen = ({
 
                 <View style={styles.divider} />
 
-                <Text style={styles.date}>
-                    날짜
+                <Text 
+                    style={styles.date}
+                    onPress={() => {
+                        setShow(true)
+                    }}
+                >
+                    {date.getFullYear() + '년 ' 
+                    + (date.getMonth() + 1) + '월 '
+                    + date.getDate() + '일'}
                 </Text>
+
+                <View style={styles.divider} />
+
+                {show &&
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode='date'
+                        is24Hour={true}
+                        display="default"
+                        onChange={onChange}
+                    />
+                }
 
             </View>
         </SafeAreaView>
@@ -73,7 +107,6 @@ const styles = StyleSheet.create({
         color: '#212121',
     },
     date: {
-        padding: 20,
         paddingTop: 20,
         fontSize: 20,
         color: '#bdbdbd',
