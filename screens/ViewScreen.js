@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     },
     image: {
         marginBottom: 20,
-        width: 200,
-        height: 200,
+        width: 400,
+        height: 400,
         resizeMode: 'cover',
         transform: [{ scale: 0.55 }],
     },
