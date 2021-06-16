@@ -4,8 +4,8 @@ import {
     View,
     Image,
     TextInput,
+    TouchableOpacity,
     StyleSheet,
-    Platform,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { withContext } from 'react-simplified-context'
@@ -56,17 +56,24 @@ const EditScreen = ({
                     </TextInput>
 
                     <View style={styles.divider} />
-
-                    <Text 
-                        style={styles.date}
+                    
+                    <TouchableOpacity
+                        activeOpacity={0.8}
                         onPress={() => {
                             setShow(true)
                         }}
+                        hitSlop={{ top: 16, bottom: 32, left: 32, right: 32}}
                     >
-                        {date.getFullYear() + '년 ' 
-                        + (date.getMonth() + 1) + '월 '
-                        + date.getDate() + '일'}
-                    </Text>
+                        <Text 
+                            style={styles.date}
+                            
+                        >
+                            {date.getFullYear() + '년 ' 
+                            + (date.getMonth() + 1) + '월 '
+                            + date.getDate() + '일'}
+                        </Text>
+                    </TouchableOpacity>
+                    
 
                     <View style={styles.divider} />
 
@@ -102,6 +109,10 @@ const styles = StyleSheet.create({
         height: 400,
         resizeMode: 'cover',
         transform: [{ scale: 0.55 }],
+        borderRadius: 150 / 2,
+        overflow: "hidden",
+        borderWidth: 3,
+        borderColor: "#e1e1e1"
     },
     name: {
         width: '80%',
