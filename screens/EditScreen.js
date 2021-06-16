@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { 
     Text,
     View,
@@ -6,18 +6,22 @@ import {
     TextInput,
     TouchableOpacity,
     StyleSheet,
+    Platform,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { withContext } from 'react-simplified-context'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import * as ImagePicker from 'expo-image-picker'
 import EditHeader from '../components/EditHeader'
+
+const defaultImg = require('../assets/favicon.png')
 
 const EditScreen = ({
     create,
 }) => {
     const [name, setName] = useState('')
-    const [image, setImage] = useState(require('../assets/favicon.png'))
+    const [image, setImage] = useState(defaultImg)
     const [date, setDate] = useState(new Date())
     const [show, setShow] = useState(false)
 
@@ -27,21 +31,53 @@ const EditScreen = ({
         setDate(currentDate)
     }
 
+    useEffect(() => {
+        (async () => {
+            if(Platform.OS !== 'web') {
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+                if(status !== 'granted') {
+                    alert('미동의시 이미지 등록이 불가능합니다.')
+                }
+            }
+        })()
+    }, []) 
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        })
+
+        if(!result.cancelled) {
+            setImage(result.uri)
+        } 
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <EditHeader done={() => {
                 create(name
-                    , image === require('../assets/favicon.png') ?
-                        '' : image
+                    , image === 
+                        defaultImg ? '' : image
                     , date)
             }} />
 
             <KeyboardAwareScrollView>
                 <View style={styles.info}>
-                    <Image 
-                        style={styles.image}
-                        source={image}
-                    />
+                    <TouchableOpacity
+                        activeOpacity={0.8}
+                        onPress={pickImage}
+                    >
+                        <Image 
+                            style={styles.image}
+                            source={ image === 
+                                defaultImg ? defaultImg : 
+                                    {uri: image}
+                            }
+                        />
+                    </TouchableOpacity>
                         
                     <TextInput 
                         placeholder="상품명" 
