@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { withContext } from 'react-simplified-context'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import EditHeader from '../components/EditHeader'
 
@@ -35,51 +36,53 @@ const EditScreen = ({
                     , date)
             }} />
 
-            <View style={styles.info}>
-                <Image 
-                    style={styles.image}
-                    source={image}
-                />
-                    
-                <TextInput 
-                    placeholder="상품명" 
-                    multiline={true}
-                    textAlign='center'
-                    onChangeText={(text) => { 
-                        setName(text) 
-                    }}
-                    style={styles.name}
-                >
-                    {name}
-                </TextInput>
-
-                <View style={styles.divider} />
-
-                <Text 
-                    style={styles.date}
-                    onPress={() => {
-                        setShow(true)
-                    }}
-                >
-                    {date.getFullYear() + '년 ' 
-                    + (date.getMonth() + 1) + '월 '
-                    + date.getDate() + '일'}
-                </Text>
-
-                <View style={styles.divider} />
-
-                {show &&
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        value={date}
-                        mode='date'
-                        is24Hour={true}
-                        display="default"
-                        onChange={onChange}
+            <KeyboardAwareScrollView>
+                <View style={styles.info}>
+                    <Image 
+                        style={styles.image}
+                        source={image}
                     />
-                }
+                        
+                    <TextInput 
+                        placeholder="상품명" 
+                        multiline={true}
+                        textAlign='center'
+                        onChangeText={(text) => { 
+                            setName(text) 
+                        }}
+                        style={styles.name}
+                    >
+                        {name}
+                    </TextInput>
 
-            </View>
+                    <View style={styles.divider} />
+
+                    <Text 
+                        style={styles.date}
+                        onPress={() => {
+                            setShow(true)
+                        }}
+                    >
+                        {date.getFullYear() + '년 ' 
+                        + (date.getMonth() + 1) + '월 '
+                        + date.getDate() + '일'}
+                    </Text>
+
+                    <View style={styles.divider} />
+
+                    {show &&
+                        <DateTimePicker
+                            testID="dateTimePicker"
+                            value={date}
+                            mode='date'
+                            is24Hour={true}
+                            display="default"
+                            onChange={onChange}
+                        />
+                    }
+
+                </View>
+            </KeyboardAwareScrollView>
         </SafeAreaView>
     )
 }
