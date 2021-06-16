@@ -16,7 +16,11 @@ const ListScreen = ({
         <SafeAreaView style={styles.container}>
             <Header title="목록" button="폐기 전부 삭제"/>
             <FlatList 
-                data={articles}
+                data={articles.sort((a, b) => {
+                    return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
+                }).sort((a, b) => {
+                    return a.date > b.date
+                })}
                 renderItem={({ item }) => {
                     return <ArticleItem article={item} />
                 }}

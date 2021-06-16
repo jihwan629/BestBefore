@@ -12,8 +12,8 @@ export default class App extends React.Component {
     articles: [
       {
         id: 1,
-        name: '딸기 샌드위치, 백종원 도시락, 전주 비빔밥 삼각김밥, 바나나, 사과, 오렌지, 트윈 쿠키, 돈가스 삼각김밥, 제육 김밥, 참치마요 삼각김밥, 피쉬 버거',
-        date: new Date(2021, 5, 10),
+        name: '제육 김밥',
+        date: new Date(2021, 5, 30),
         image: defaultimage,
       },
       {
@@ -25,11 +25,23 @@ export default class App extends React.Component {
       {
         id: 3,
         name: '콩나물',
-        date: new Date(2021, 5, 30),
+        date: new Date(2021, 5, 10),
+        image: defaultimage,
+      },
+      {
+        id: 4,
+        name: '부침 두부',
+        date: new Date(2021, 5, 14),
+        image: defaultimage,
+      },
+      {
+        id: 5,
+        name: '고기 듬뿍 도시락',
+        date: new Date(2021, 5, 10),
         image: defaultimage,
       },
     ],
-    id: 4,
+    id: 6,
   }
 
   render() {
@@ -44,6 +56,8 @@ export default class App extends React.Component {
 
           if(date === undefined || date === '') 
             date = new Date()
+          else
+            date = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 
           this.setState({
             articles: [{

@@ -21,6 +21,8 @@ const TodayScreen = ({
                     return article.date.getFullYear() === today.getFullYear()
                             &&  article.date.getMonth() === today.getMonth()
                             &&  article.date.getDate() === today.getDate()
+                }).sort((a, b) => {
+                    return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
                 })}
                 renderItem={({ item }) => {
                     return <ArticleItem article={item} />
