@@ -21,6 +21,8 @@ const ArticleItem = ({
     },
     navigation,
 }) => {
+    const dateSplit = date.split(' ')
+
     return (
         <TouchableOpacity
             activeOpacity={0.8}
@@ -39,9 +41,9 @@ const ArticleItem = ({
 
                 <View style={styles.info}>
                     <Text style={styles.date}>
-                        {date.getFullYear() + '년 ' 
-                        + (date.getMonth() + 1) + '월 '
-                        + date.getDate() + '일'}
+                        { dateSplit[0] + '년 ' 
+                        + dateSplit[1] + '월 '
+                        + dateSplit[2] + '일'}
                     </Text>
                     <Text 
                         style={styles.name}

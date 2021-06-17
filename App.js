@@ -1,50 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { render } from 'react-dom';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { ContextProvider } from 'react-simplified-context'
 import Navigator from './Navigator'
+import AsyncStroage from '@react-native-async-storage/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 let today = new Date()
 
 export default class App extends React.Component {
   state = {
-    articles: [
-      {
-        id: 1,
-        name: '제육 김밥',
-        date: new Date(2021, 5, 30),
-        image: '',
-      },
-      {
-        id: 2,
-        name: '참치마요 삼각김밥',
-        date: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-        image: '',
-      },
-      {
-        id: 3,
-        name: '콩나물',
-        date: new Date(2021, 5, 10),
-        image: '',
-      },
-      {
-        id: 4,
-        name: '부침 두부',
-        date: new Date(2021, 5, 14),
-        image: '',
-      },
-      {
-        id: 5,
-        name: '고기 듬뿍 도시락',
-        date: new Date(2021, 5, 10),
-        image: '',
-      },
-    ],
-    id: 6,
+    articles: [],
+    id: 0,
+  }
+
+componentDidMount() {
+  AsyncStorage.getItem('@diary:state').then((state) => {
+    this.setState(JSON.parse(state))
+  })
+}
+
+  save = () => {
+    AsyncStorage.setItem('@diary:state', JSON.stringify(this.state))
   }
 
   render() {
+    // 저장된 데이터 삭제
+    //AsyncStorage.clear()
+
     return (
       <ContextProvider
         articles={this.state.articles}
@@ -52,11 +34,9 @@ export default class App extends React.Component {
         create={(name, image, date) => {
           if(date === undefined || date === '') {
             today = new Date()
-            date = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+            date = today.getFullYear() + ' ' + (today.getMonth() + 1) + ' ' + today.getDate()
           }
-          else
-            date = new Date(date.getFullYear(), date.getMonth(), date.getDate())
-
+        
           this.setState({
             articles: [{
               id: this.state.id,
@@ -65,7 +45,7 @@ export default class App extends React.Component {
               date: date
             }].concat(this.state.articles),
             id: this.state.id + 1,
-          })
+          }, this.save)
         }}
 
         update={(id, name, image, date) => {
@@ -80,7 +60,7 @@ export default class App extends React.Component {
 
           this.setState({
             articles: newArticles,
-          })
+          }, this.save)
         }}
       >
         <Navigator />

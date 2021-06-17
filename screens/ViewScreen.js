@@ -22,6 +22,8 @@ const ViewScreen = ({
         return a.id === id
     })
 
+    const splitDate = article.date.split(' ')
+
     return (
         <SafeAreaView style={styles.container}>
             <ViewHeader />
@@ -44,9 +46,9 @@ const ViewScreen = ({
                     </Text>
 
                     <Text style={styles.date}>
-                        {article.date.getFullYear() + '년 ' 
-                        + (article.date.getMonth() + 1) + '월 '
-                        + article.date.getDate() + '일'}
+                        {splitDate[0] + '년 ' 
+                        + splitDate[1] + '월 '
+                        + splitDate[2] + '일'}
                     </Text>
                 </TouchableOpacity>
                 

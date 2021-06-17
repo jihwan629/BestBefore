@@ -29,9 +29,14 @@ const EditScreen = ({
         return a.id === id
     })
 
+    var today = new Date()
+    const splitDate = article ? article.date.split(' ') : null
+
     const [name, setName] = useState(article ? article.name : '')
     const [image, setImage] = useState(article ? article.image : '')
-    const [date, setDate] = useState(article ? article.date : new Date())
+    const [date, setDate] = useState(splitDate ? 
+        new Date(splitDate[0], parseInt(splitDate[1], 10) - 1, splitDate[2]) : 
+        new Date(today.getFullYear(), today.getMonth(), today.getDate()))
     const [show, setShow] = useState(false)
 
     const onChange = (event, selectedDate) => {
@@ -92,11 +97,11 @@ const EditScreen = ({
                     update(id
                         , name
                         , image === defaultImg ? '' : image
-                        , date)
+                        , date.getFullYear() + ' ' + (date.getMonth() + 1) + ' ' + date.getDate())
                 } else {
                     create(name
                         , image === defaultImg ? '' : image
-                        , date)
+                        , date.getFullYear() + ' ' + (date.getMonth() + 1) + ' ' + date.getDate())
                 }
             }} />
 

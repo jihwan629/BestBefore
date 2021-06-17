@@ -18,9 +18,11 @@ const TodayScreen = ({
             <FlatList 
                 data={articles.filter((article) => {
                     var today = new Date()
-                    return article.date.getFullYear() === today.getFullYear()
-                            &&  article.date.getMonth() === today.getMonth()
-                            &&  article.date.getDate() === today.getDate()
+                    const splitDate = article.date.split(' ')
+
+                    return splitDate[0] == today.getFullYear()
+                            &&  splitDate[1] == today.getMonth() + 1
+                            &&  splitDate[2] == today.getDate()
                 }).sort((a, b) => {
                     return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
                 })}
