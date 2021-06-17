@@ -5,7 +5,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ContextProvider } from 'react-simplified-context'
 import Navigator from './Navigator'
 
-const defaultimage = require('./assets/favicon.png')
 let today = new Date()
 
 export default class App extends React.Component {
@@ -15,31 +14,31 @@ export default class App extends React.Component {
         id: 1,
         name: '제육 김밥',
         date: new Date(2021, 5, 30),
-        image: defaultimage,
+        image: '',
       },
       {
         id: 2,
         name: '참치마요 삼각김밥',
         date: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
-        image: defaultimage,
+        image: '',
       },
       {
         id: 3,
         name: '콩나물',
         date: new Date(2021, 5, 10),
-        image: defaultimage,
+        image: '',
       },
       {
         id: 4,
         name: '부침 두부',
         date: new Date(2021, 5, 14),
-        image: defaultimage,
+        image: '',
       },
       {
         id: 5,
         name: '고기 듬뿍 도시락',
         date: new Date(2021, 5, 10),
-        image: defaultimage,
+        image: '',
       },
     ],
     id: 6,
@@ -51,11 +50,6 @@ export default class App extends React.Component {
         articles={this.state.articles}
 
         create={(name, image, date) => {
-          if(image === undefined || image === '') 
-            image = defaultimage
-          else
-            image = {uri: `${image}`}
-
           if(date === undefined || date === '') {
             today = new Date()
             date = new Date(today.getFullYear(), today.getMonth(), today.getDate())
@@ -71,6 +65,21 @@ export default class App extends React.Component {
               date: date
             }].concat(this.state.articles),
             id: this.state.id + 1,
+          })
+        }}
+
+        update={(id, name, image, date) => {
+          const newArticles = [...this.state.articles]
+          const index = newArticles.findIndex((a) => {
+            return a.id === id
+          })
+
+          newArticles[index].name = name
+          newArticles[index].image = image
+          newArticles[index].date = date
+
+          this.setState({
+            articles: newArticles,
           })
         }}
       >

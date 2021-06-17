@@ -11,6 +11,8 @@ import { withNavigation } from 'react-navigation'
 import { withContext } from 'react-simplified-context'
 import ViewHeader from '../components/ViewHeader'
 
+const defaultImg = require('../assets/favicon.png')
+
 const ViewScreen = ({
     navigation,
     articles,
@@ -28,12 +30,13 @@ const ViewScreen = ({
                     activeOpacity={0.8}
                     style={styles.info}
                     onLongPress={() => {
-                        navigation.navigate('Edit')
+                        navigation.navigate('Edit', { id: id})
                     }}
                 >
                     <Image 
                         style={styles.image}
-                        source={article.image}
+                        source={(article.image === undefined || article.image === '') ? 
+                            defaultImg : {uri: `${article.image}`}}
                     />
                     
                     <Text style={styles.name}>

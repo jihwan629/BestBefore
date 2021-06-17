@@ -10,6 +10,8 @@ import {
 import { withNavigation } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 
+const defaultImg = require('../assets/favicon.png')
+
 const ArticleItem = ({
     article: {
         id,
@@ -30,7 +32,8 @@ const ArticleItem = ({
                 <View>
                     <Image
                         style={styles.image}
-                        source={image}
+                        source={(image === undefined || image === '') ? 
+                                defaultImg : {uri: `${image}`}}
                     />
                 </View>
 

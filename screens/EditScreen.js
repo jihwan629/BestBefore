@@ -9,6 +9,7 @@ import {
     Platform,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { withNavigation } from 'react-navigation'
 import { withContext } from 'react-simplified-context'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -19,10 +20,18 @@ const defaultImg = require('../assets/favicon.png')
 
 const EditScreen = ({
     create,
+    update,
+    articles,
+    navigation,
 }) => {
-    const [name, setName] = useState('')
-    const [image, setImage] = useState(defaultImg)
-    const [date, setDate] = useState(new Date())
+    const id = navigation.getParam('id', -1)
+    const article = articles.find((a) => {
+        return a.id === id
+    })
+
+    const [name, setName] = useState(article ? article.name : '')
+    const [image, setImage] = useState(article ? article.image : '')
+    const [date, setDate] = useState(article ? article.date : new Date())
     const [show, setShow] = useState(false)
 
     const onChange = (event, selectedDate) => {
@@ -79,10 +88,16 @@ const EditScreen = ({
     return (
         <SafeAreaView style={styles.container}>
             <EditHeader done={() => {
-                create(name
-                    , image === 
-                        defaultImg ? '' : image
-                    , date)
+                if(id > -1) {
+                    update(id
+                        , name
+                        , image === defaultImg ? '' : image
+                        , date)
+                } else {
+                    create(name
+                        , image === defaultImg ? '' : image
+                        , date)
+                }
             }} />
 
             <KeyboardAwareScrollView>
@@ -93,10 +108,8 @@ const EditScreen = ({
                     >
                         <Image 
                             style={styles.image}
-                            source={ image === 
-                                defaultImg ? defaultImg : 
-                                    {uri: image}
-                            }
+                            source={(image === undefined || image === '') ? 
+                                defaultImg : {uri: `${image}`}}
                         />
                     </TouchableOpacity>
                         
@@ -191,4 +204,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default withContext(EditScreen)
+export default withNavigation(withContext(EditScreen))
