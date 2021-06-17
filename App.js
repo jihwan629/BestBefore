@@ -5,7 +5,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ContextProvider } from 'react-simplified-context'
 import Navigator from './Navigator'
 
-let defaultimage = require('./assets/favicon.png');
+const defaultimage = require('./assets/favicon.png')
+let today = new Date()
 
 export default class App extends React.Component {
   state = {
@@ -18,8 +19,8 @@ export default class App extends React.Component {
       },
       {
         id: 2,
-        name: '제육 삼각김밥',
-        date: new Date(),
+        name: '참치마요 삼각김밥',
+        date: new Date(today.getFullYear(), today.getMonth(), today.getDate()),
         image: defaultimage,
       },
       {
@@ -48,14 +49,17 @@ export default class App extends React.Component {
     return (
       <ContextProvider
         articles={this.state.articles}
+
         create={(name, image, date) => {
           if(image === undefined || image === '') 
             image = defaultimage
           else
             image = {uri: `${image}`}
 
-          if(date === undefined || date === '') 
-            date = new Date()
+          if(date === undefined || date === '') {
+            today = new Date()
+            date = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+          }
           else
             date = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 

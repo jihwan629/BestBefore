@@ -23,7 +23,7 @@ const ArticleItem = ({
         <TouchableOpacity
             activeOpacity={0.8}
             onPress={() =>
-                navigation.navigate('View')
+                navigation.navigate('View', { id : id })
             }
         >
             <View style={styles.container}>
@@ -85,6 +85,8 @@ const styles = StyleSheet.create({
             ios: 1,
             android: 4
         }),
+        borderRadius: 150 / 8,
+        overflow: "hidden",
     },
 })
 

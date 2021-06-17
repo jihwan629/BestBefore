@@ -8,11 +8,18 @@ import {
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { withNavigation } from 'react-navigation'
+import { withContext } from 'react-simplified-context'
 import ViewHeader from '../components/ViewHeader'
 
 const ViewScreen = ({
     navigation,
+    articles,
 }) => {
+    const id = navigation.getParam('id', -1)
+    const article = articles.find((a) => {
+        return a.id === id
+    })
+
     return (
         <SafeAreaView style={styles.container}>
             <ViewHeader />
@@ -26,15 +33,17 @@ const ViewScreen = ({
                 >
                     <Image 
                         style={styles.image}
-                        source={require('../assets/favicon.png')}
+                        source={article.image}
                     />
                     
                     <Text style={styles.name}>
-                        식품 이름
+                        {article.name}
                     </Text>
 
                     <Text style={styles.date}>
-                        날짜
+                        {article.date.getFullYear() + '년 ' 
+                        + (article.date.getMonth() + 1) + '월 '
+                        + article.date.getDate() + '일'}
                     </Text>
                 </TouchableOpacity>
                 
@@ -58,6 +67,8 @@ const styles = StyleSheet.create({
         height: 400,
         resizeMode: 'cover',
         transform: [{ scale: 0.55 }],
+        borderRadius: 150 / 2,
+        overflow: "hidden",
     },
     name: {
         padding: 20,
@@ -73,4 +84,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default withNavigation(ViewScreen)
+export default withNavigation(withContext(ViewScreen))
