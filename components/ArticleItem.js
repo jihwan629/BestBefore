@@ -8,7 +8,10 @@ import {
     Platform,
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
+import { withContext } from 'react-simplified-context'
 import { Ionicons } from '@expo/vector-icons'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
+import DeleteButton from './DeleteButton'
 
 const defaultImg = require('../assets/favicon.png')
 
@@ -20,41 +23,48 @@ const ArticleItem = ({
         date,
     },
     navigation,
+    removeById,
 }) => {
     const dateSplit = date.split(' ')
 
     return (
-        <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() =>
-                navigation.navigate('View', { id : id })
+        <Swipeable
+            renderRightActions = {() => 
+                <DeleteButton onPress={() => removeById(id)} />
             }
         >
-            <View style={styles.container}>
-                <View>
-                    <Image
-                        style={styles.image}
-                        source={(image === undefined || image === '') ? 
-                                defaultImg : {uri: `${image}`}}
-                    />
-                </View>
+            <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() =>
+                    navigation.navigate('View', { id : id })
+                }
+            >
+                <View style={styles.container}>
+                    <View>
+                        <Image
+                            style={styles.image}
+                            source={(image === undefined || image === '') ? 
+                                    defaultImg : {uri: `${image}`}}
+                        />
+                    </View>
 
-                <View style={styles.info}>
-                    <Text style={styles.date}>
-                        { dateSplit[0] + '년 ' 
-                        + dateSplit[1] + '월 '
-                        + dateSplit[2] + '일'}
-                    </Text>
-                    <Text 
-                        style={styles.name}
-                        numberOfLines={2}
-                    >
-                        {name}
-                    </Text>
+                    <View style={styles.info}>
+                        <Text style={styles.date}>
+                            { dateSplit[0] + '년 ' 
+                            + dateSplit[1] + '월 '
+                            + dateSplit[2] + '일'}
+                        </Text>
+                        <Text 
+                            style={styles.name}
+                            numberOfLines={2}
+                        >
+                            {name}
+                        </Text>
+                    </View>
                 </View>
-            </View>
-            
-        </TouchableOpacity>
+                
+            </TouchableOpacity>
+        </Swipeable>
     )
 }
 
@@ -95,4 +105,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default withNavigation(ArticleItem)
+export default withNavigation(withContext(ArticleItem))

@@ -62,6 +62,35 @@ componentDidMount() {
             articles: newArticles,
           }, this.save)
         }}
+
+        removeById={(id) => {
+          const index = this.state.articles.findIndex((a) => {
+            return a.id === id
+          })   
+
+          this.setState({ 
+            articles: this.state.articles.filter((_, i) => i !== index)
+          }, this.save)
+        }}
+
+        removeToday={() => {
+          today = new Date()
+
+          this.setState({ 
+            articles: this.state.articles.filter((article) => {
+              const splitDate = article.date.split(' ')
+
+              return splitDate[0] != today.getFullYear()
+                      ||  splitDate[1] != today.getMonth() + 1
+                      ||  splitDate[2] != today.getDate()
+          })
+          }, this.save)
+        }}
+
+        // 저장된 데이터 삭제
+        reset={() => {
+          AsyncStorage.clear()
+        }}
       >
         <Navigator />
       </ContextProvider>
