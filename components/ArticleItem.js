@@ -26,6 +26,9 @@ const ArticleItem = ({
     removeById,
 }) => {
     const dateSplit = date.split(' ')
+    const dateArticle = new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2])
+    var today = new Date()
+    const expired = dateArticle < new Date(today.getFullYear(), today.getMonth(), today.getDate())
 
     return (
         <Swipeable
@@ -39,7 +42,7 @@ const ArticleItem = ({
                     navigation.navigate('View', { id : id })
                 }
             >
-                <View style={styles.container}>
+                <View style={[styles.container, expired && styles.container_expired]}>
                     <View>
                         <Image
                             style={styles.image}
@@ -75,6 +78,9 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#e2e2e2',
+    },
+    container_expired: {
+        backgroundColor: '#e2e2e2'
     },
     info: {
         flex: 1,
