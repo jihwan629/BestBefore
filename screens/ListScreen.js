@@ -14,7 +14,12 @@ const ListScreen = ({
 }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="목록" button="지난 폐기 삭제"/>
+            <Header 
+                title="목록" 
+                button="지난 폐기 삭제"
+                onPress={() => console.log("지난 폐기 삭제")}
+            />
+
             <FlatList 
                 data={articles.sort((a, b) => {
                     return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;

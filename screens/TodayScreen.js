@@ -11,10 +11,16 @@ import Header from '../components/Header'
 
 const TodayScreen = ({
     articles,
+    removeToday,
 }) => {
     return (
         <SafeAreaView style={styles.container}>
-            <Header title="오늘" button="오늘 폐기 삭제"/>
+            <Header 
+                title="오늘" 
+                button="오늘 폐기 삭제"
+                onPress={() => removeToday()}
+            />
+
             <FlatList 
                 data={articles.filter((article) => {
                     var today = new Date()

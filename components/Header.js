@@ -12,6 +12,7 @@ const ListHeader = ({
     navigation,
     title,
     button,
+    onPress,
 }) => {
     return (
         <View style={styles.container}>
@@ -23,9 +24,7 @@ const ListHeader = ({
             <TouchableOpacity
                 activeOpacity={button === '' ? 1 : 0.8}
                 disabled={button === ''}
-                onPress={() => {
-                    
-                }}
+                onPress={onPress}
                 hitSlop={{ top: 32, left: 32, right: 32}}
             >
                 <Text style={styles.button}>
