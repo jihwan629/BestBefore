@@ -2,8 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { ContextProvider } from 'react-simplified-context'
 import Navigator from './Navigator'
-import AsyncStroage from '@react-native-async-storage/async-storage'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 let today = new Date()
 
@@ -83,6 +82,19 @@ componentDidMount() {
               return splitDate[0] != today.getFullYear()
                       ||  splitDate[1] != today.getMonth() + 1
                       ||  splitDate[2] != today.getDate()
+          })
+          }, this.save)
+        }}
+
+        removeExpired={() => {
+          today = new Date()
+
+          this.setState({ 
+            articles: this.state.articles.filter((article) => {
+              const splitDate = article.date.split(' ')
+              const date = new Date(splitDate[0], splitDate[1] - 1, splitDate[2])
+ 
+              return date >= new Date(today.getFullYear(), today.getMonth(), today.getDate())
           })
           }, this.save)
         }}

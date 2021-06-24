@@ -11,13 +11,14 @@ import Header from '../components/Header'
 
 const ListScreen = ({
     articles,
+    removeExpired,
 }) => {
     return (
         <SafeAreaView style={styles.container}>
             <Header 
                 title="목록" 
                 button="지난 폐기 삭제"
-                onPress={() => console.log("지난 폐기 삭제")}
+                onPress={() => removeExpired()}
             />
 
             <FlatList 
