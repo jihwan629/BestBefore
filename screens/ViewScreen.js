@@ -16,17 +16,20 @@ const defaultImg = require('../assets/favicon.png')
 const ViewScreen = ({
     navigation,
     articles,
+    removeById,
 }) => {
     const id = navigation.getParam('id', -1)
     const article = articles.find((a) => {
         return a.id === id
     })
 
-    const splitDate = article.date.split(' ')
+    var today = new Date()
+    const splitDate = article ? article.date.split(' ') : 
+        [ today.getFullYear(), today.getMonth() + 1, today.getDate()]
 
     return (
         <SafeAreaView style={styles.container}>
-            <ViewHeader />
+            <ViewHeader onPress={() => removeById(id)} />
             <ScrollView contentContainerStyle={styles.info}>
                 <TouchableOpacity
                     activeOpacity={0.8}
@@ -37,12 +40,12 @@ const ViewScreen = ({
                 >
                     <Image 
                         style={styles.image}
-                        source={(article.image === undefined || article.image === '') ? 
+                        source={(!article || article.image === undefined || article.image === '') ? 
                             defaultImg : {uri: `${article.image}`}}
                     />
                     
                     <Text style={styles.name}>
-                        {article.name}
+                        {article ? article.name : 'None'}
                     </Text>
 
                     <Text style={styles.date}>

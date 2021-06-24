@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 const ViewHeader = ({
     navigation,
+    onPress
 }) => {
     return (
         <View style={styles.container}>
@@ -30,6 +31,7 @@ const ViewHeader = ({
             <TouchableOpacity
                 activeOpacity={0.8}
                 onPress={() => {
+                    onPress()
                     navigation.goBack()
                 }}
                 hitSlop={{ top: 32, bottom: 32, left: 32, right: 32}}
