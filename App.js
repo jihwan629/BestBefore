@@ -23,9 +23,6 @@ componentDidMount() {
   }
 
   render() {
-    // 저장된 데이터 삭제
-    //AsyncStorage.clear()
-
     return (
       <ContextProvider
         articles={this.state.articles}

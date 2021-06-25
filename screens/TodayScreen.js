@@ -25,7 +25,6 @@ const TodayScreen = ({
                 title="오늘" 
                 button="오늘 폐기 삭제"
                 onPress={() => toggleModal()}
-                // onPress={() => removeToday()}
             />
 
             <ModalButton

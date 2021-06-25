@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
 import { withContext } from 'react-simplified-context'
-import { Ionicons } from '@expo/vector-icons'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import DeleteButton from './DeleteButton'
 

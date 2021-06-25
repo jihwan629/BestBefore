@@ -6,7 +6,6 @@ import {
     TouchableOpacity,
 } from 'react-native'
 import { withNavigation } from 'react-navigation'
-import { Ionicons } from '@expo/vector-icons'
 
 const Header = ({
     navigation,

@@ -30,7 +30,6 @@ const ListScreen = ({
                 title="목록" 
                 button="지난 폐기 삭제"
                 onPress={() => toggleModal()}
-                // onPress={() => removeExpired()}
                 onLongPress={() => toggleReset()}
             />
 
@@ -82,57 +81,6 @@ const ListScreen = ({
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 22,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    modalView: {
-        margin: 20,
-        backgroundColor: '#f2f2f2',
-        borderRadius: 10,
-        paddingTop: 35,
-        paddingBottom: 15,
-        paddingLeft: 10,
-        paddingRight: 10,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    containerButton: {
-        flexDirection: 'row',
-        padding: 5,
-    },
-    modalButton: {
-        backgroundColor: '#F194FF',
-        borderRadius: 10,
-        padding: 20,
-        paddingLeft: 40,
-        paddingRight: 40,
-        margin: 15,
-        marginBottom: 0,
-        elevation: 2,
-    },
-    textStyle: {
-        color: 'white',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    modalText: {
-        marginBottom: 15,
-        textAlign: 'center',
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: '#212121',
     },
 })
 
