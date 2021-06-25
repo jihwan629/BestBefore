@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { withContext } from 'react-simplified-context'
 import ArticleItem from '../components/ArticleItem'
 import Header from '../components/Header'
+import ModalButton from '../components/ModalButton'
 
 const ListScreen = ({
     articles,
@@ -31,46 +32,16 @@ const ListScreen = ({
                 // onPress={() => removeExpired()}
             />
 
-            <Modal
-                animationType="fade"
-                transparent={true}
-                visible={isModalVisible}
-            >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>
-                            정말로 삭제 하시겠습니까?
-                        </Text>
-
-                        <View
-                            style={styles.containerButton}
-                        >
-                            <TouchableOpacity
-                                activeOpacity={0.8}
-                                style={{ ...styles.modalButton, backgroundColor: '#da5746' }}
-                                onPress={() => {
-                                    removeExpired()
-                                    toggleModal()
-                                }}
-                            >
-                                <Text style={styles.textStyle}>
-                                    삭제
-                                </Text>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                activeOpacity={0.8}
-                                style={{ ...styles.modalButton, backgroundColor: '#9e9e9e' }}
-                                onPress={() => toggleModal()}
-                            >
-                                <Text style={styles.textStyle}>
-                                    취소
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-            </Modal>
+            <ModalButton 
+                isvisible={isModalVisible}
+                confirm={() => {
+                    removeExpired()
+                    toggleModal()
+                }}
+                cancel={() => {
+                    toggleModal()
+                }}
+            />
 
             <FlatList 
                 data={articles.sort((a, b) => {
