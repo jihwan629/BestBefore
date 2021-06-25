@@ -102,6 +102,11 @@ componentDidMount() {
         // 저장된 데이터 삭제
         reset={() => {
           AsyncStorage.clear()
+
+          this.setState({
+            articles: [],
+            id: 0,
+          })
         }}
       >
         <Navigator />

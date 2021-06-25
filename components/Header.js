@@ -8,18 +8,25 @@ import {
 import { withNavigation } from 'react-navigation'
 import { Ionicons } from '@expo/vector-icons'
 
-const ListHeader = ({
+const Header = ({
     navigation,
     title,
     button,
     onPress,
+    onLongPress
 }) => {
     return (
         <View style={styles.container}>
 
-            <Text style={styles.header}>
-                {title}
-            </Text>
+            <TouchableOpacity
+                activeOpacity={0.8}
+                onLongPress={onLongPress}
+            >
+                <Text style={styles.header}>
+                    {title}
+                </Text>
+            </TouchableOpacity>
+            
 
             <TouchableOpacity
                 activeOpacity={button === '' ? 1 : 0.8}
@@ -60,4 +67,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default withNavigation(ListHeader)
+export default withNavigation(Header)

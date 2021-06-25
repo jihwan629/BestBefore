@@ -8,6 +8,7 @@ import {
 } from 'react-native'
 
 const ModalButton = ({
+    title,
     isvisible,
     confirm,
     cancel
@@ -21,7 +22,7 @@ const ModalButton = ({
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                     <Text style={styles.modalText}>
-                        정말로 삭제 하시겠습니까?
+                        {title}
                     </Text>
 
                     <View

@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import { 
-    View,
-    Text,
     StyleSheet,
     FlatList,
-    Modal,
-    TouchableOpacity,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { withContext } from 'react-simplified-context'
@@ -16,11 +12,16 @@ import ModalButton from '../components/ModalButton'
 const ListScreen = ({
     articles,
     removeExpired,
+    reset,
 }) => {
     const [isModalVisible, setModalVisible] = useState(false)
+    const [isResetVisible, setResetVisible] = useState(false)
 
     const toggleModal = () => {
         setModalVisible(!isModalVisible)
+    }
+    const toggleReset = () => {
+        setResetVisible(!isResetVisible)
     }
 
     return (
@@ -30,9 +31,23 @@ const ListScreen = ({
                 button="지난 폐기 삭제"
                 onPress={() => toggleModal()}
                 // onPress={() => removeExpired()}
+                onLongPress={() => toggleReset()}
             />
 
             <ModalButton 
+                title="데이터를 초기화하시겠습니까?"
+                isvisible={isResetVisible}
+                confirm={() => {
+                    reset()
+                    toggleReset()
+                }}
+                cancel={() => {
+                    toggleReset()
+                }}
+            />
+
+            <ModalButton
+                title="정말로 삭제하시겠습니까?"
                 isvisible={isModalVisible}
                 confirm={() => {
                     removeExpired()

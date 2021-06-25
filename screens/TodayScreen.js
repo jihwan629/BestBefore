@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
 import { 
-    View,
-    Text,
     StyleSheet,
     FlatList,
-    Modal,
-    TouchableOpacity,
 } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { withContext } from 'react-simplified-context'
@@ -33,6 +29,7 @@ const TodayScreen = ({
             />
 
             <ModalButton
+                title="정말로 삭제하시겠습니까?"
                 isvisible={isModalVisible}
                 confirm={() => {
                     removeToday()
